@@ -23,73 +23,116 @@ toe_off_c = (250-190) / (288-190) * 100;
 mass = 61.9; %kg
 
 %Plot
-figure;
-tiledlayout(3,2);
 
 %Hip moment flexion/extension
+figure;
+tiledlayout(1,2);
 nexttile;
 plot(gait_cycle_w, -walking.hip_flexion_r_moment(time_nw)/mass, LineWidth=1.5);
 xline(toe_off_w, '--', HandleVisibility='off');
 hold on;
+plot(gait_cycle_vw, vicon_w.RHipMoment, ':', Color=[0 0.447 0.741], LineWidth=1.5);
+xlabel('Gait cycle (%)');
+ylabel('Extension > 0 (Nm/kg)');
+title('Hip moment - Sagittal plane - Normal walking');
+legend('OpenSim', 'Vicon');
+grid on;
+nexttile;
 plot(gait_cycle_c, -crouch.hip_flexion_r_moment(time_cw)/mass, LineWidth=1.5);
 xline(toe_off_c, '--', HandleVisibility='off');
-plot(gait_cycle_vw, vicon_w.RHipMoment, ':', Color=[0 0.447 0.741], LineWidth=1.5);
+hold on;
 plot(gait_cycle_vc, vicon_c.RHipMoment, ':', Color=[0.85 0.325 0.098], LineWidth=1.5);
 xlabel('Gait cycle (%)');
 ylabel('Extension > 0 (Nm/kg)');
-title('Hip moment - Sagittal plane');
-legend('Normal walking', 'Crouch walking', 'Normal walking (Vicon)', 'Crouch walking (Vicon)');
+title('Hip moment - Sagittal plane - Crouch walking');
+legend('OpenSim', 'Vicon');
 grid on;
 
 %Ankle moment plantarflexion/dorsiflexion
+figure;
+tiledlayout(1,2);
 nexttile;
 plot(gait_cycle_w, -walking.ankle_angle_r_moment(time_nw)/mass, LineWidth=1.5);
-xline(toe_off_w, '--');
+xline(toe_off_w, '--', HandleVisibility='off');
 hold on;
-plot(gait_cycle_c, -crouch.ankle_angle_r_moment(time_cw)/mass, LineWidth=1.5);
-xline(toe_off_c, '--');
 plot(gait_cycle_vw, vicon_w.RAnkleMoment, ':', Color=[0 0.447 0.741], LineWidth=1.5);
+xlabel('Gait cycle (%)');
+ylabel('Plantarflexion > 0 (Nm/kg)');
+title('Ankle moment - Sagittal plane - Normal walking');
+legend('OpenSim', 'Vicon');
+grid on;
+nexttile;
+plot(gait_cycle_c, -crouch.ankle_angle_r_moment(time_cw)/mass, LineWidth=1.5);
+xline(toe_off_c, '--', HandleVisibility='off');
+hold on;
 plot(gait_cycle_vc, vicon_c.RAnkleMoment, ':', Color=[0.85 0.325 0.098], LineWidth=1.5);
 xlabel('Gait cycle (%)');
 ylabel('Plantarflexion > 0 (Nm/kg)');
-title('Ankle moment - Sagittal plane');
+title('Ankle moment - Sagittal plane - Crouch walking');
+legend('OpenSim', 'Vicon');
 grid on;
 
 %Hip moment rotation
+figure;
+tiledlayout(1,2);
 nexttile;
 plot(gait_cycle_w, walking.hip_rotation_r_moment(time_nw)/mass, LineWidth=1.5);
 xline(toe_off_w, '--');
-hold on;
+xlabel('Gait cycle (%)');
+ylabel('Internal rotation > 0 (Nm/kg)');
+title('Hip moment - Transverse plane - Normal walking');
+legend('OpenSim');
+grid on;
+nexttile;
 plot(gait_cycle_c, crouch.hip_rotation_r_moment(time_cw)/mass, LineWidth=1.5);
 xline(toe_off_c, '--');
 xlabel('Gait cycle (%)');
 ylabel('Internal rotation > 0 (Nm/kg)');
-title('Hip moment - Transverse plane');
+title('Hip moment - Transverse plane - Crouch walking');
+legend('OpenSim');
 grid on;
 
 %Knee moment flexion/extension
+figure;
+tiledlayout(1,2);
 nexttile;
 plot(gait_cycle_w, walking.knee_angle_r_moment(time_nw)/mass, LineWidth=1.5);
-xline(toe_off_w, '--');
+xline(toe_off_w, '--', HandleVisibility='off');
 hold on;
-plot(gait_cycle_c, crouch.knee_angle_r_moment(time_cw)/mass, LineWidth=1.5);
-xline(toe_off_c, '--');
 plot(gait_cycle_vw, vicon_w.RKneeMoment, ':', Color=[0 0.447 0.741], LineWidth=1.5);
+xlabel('Gait cycle (%)');
+ylabel('Extension > 0 (Nm/kg)');
+title('Knee moment - Sagittal plane - Normal walking');
+legend('OpenSim', 'Vicon');
+grid on;
+nexttile;
+plot(gait_cycle_c, crouch.knee_angle_r_moment(time_cw)/mass, LineWidth=1.5);
+xline(toe_off_c, '--', HandleVisibility='off');
+hold on;
 plot(gait_cycle_vc, vicon_c.RKneeMoment, ':', Color=[0.85 0.325 0.098], LineWidth=1.5);
 xlabel('Gait cycle (%)');
 ylabel('Extension > 0 (Nm/kg)');
-title('Knee moment - Sagittal plane');
+title('Knee moment - Sagittal plane - Crouch walking');
+legend('OpenSim', 'Vicon');
 grid on;
 
 
 %Hip moment adduction/abduction
+figure;
+tiledlayout(1,2);
 nexttile;
 plot(gait_cycle_w, -walking.hip_adduction_r_moment(time_nw)/mass, LineWidth=1.5); %OpenSim: adduction > 0 -> multiply by -1
 xline(toe_off_w, '--');
-hold on;
+xlabel('Gait cycle (%)');
+ylabel('Abduction > 0 (Nm/kg)');
+title('Hip moment - Frontal plane - Normal walking');
+legend('OpenSim');
+grid on;
+nexttile;
 plot(gait_cycle_c, -crouch.hip_adduction_r_moment(time_cw)/mass, LineWidth=1.5);
 xline(toe_off_c, '--');
 xlabel('Gait cycle (%)');
 ylabel('Abduction > 0 (Nm/kg)');
-title('Hip moment - Frontal plane');
+title('Hip moment - Frontal plane - Crouch walking');
+legend('OpenSim');
 grid on;
